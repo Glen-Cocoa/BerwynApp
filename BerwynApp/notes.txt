@@ -29,3 +29,5 @@ B. Output .csv file
 		{if GUID is found in duplicates[], then 'Y', else, 'N'}
 	4. Val3GreaterLength
 		{Val3.length > return value of A.4 ? 'Y':'N'}
+
+>Pull data.csv into application
