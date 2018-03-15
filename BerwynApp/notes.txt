@@ -1,0 +1,31 @@
+Console application should have two parts;
+	A. Console output
+	B. Output .csv file
+
+A. Console output
+	1. output total number of records in the file 
+		{create a var to hold an int and increment after every iteration of a loop}
+	2. find GUID of the row that results in the highest value when summing Val1 + Val2	
+		{var (object?) holds the GUID of the last max and value of the current max
+		in each iteration of the loop, sum together Val1 + Val2 and check new_max against current_max
+		if new_max > current_max, obj.current_max = new_max && obj.max_id = current_row.GUID}
+	3. Show any duplicate GUID values
+		{have an empty *string[] duplicates*, nested loop can check each GUID against every GUID 
+		if GUID_to_be_checked === GUID_in_data then duplicates.push(GUID_to_be_checked)
+		return duplicates}
+	4. Show the average length of Val3 across input rows
+		{int average_length = 0
+		average_length += Number(row.Val3)
+		after program finishes, 
+		return average_length/total_records (number from A.1)}
+
+B. Output .csv file
+	.csv must have columns:[GUID,(Val1+Val2),IsDuplicateGuide,Val3LengthGreater]
+	1. GUID 
+		{no change}
+	2.Val1+Val2
+		{reference A.2, using same value; should this be stored somewhere?}
+	3. IsDuplicateGuide
+		{if GUID is found in duplicates[], then 'Y', else, 'N'}
+	4. Val3GreaterLength
+		{Val3.length > return value of A.4 ? 'Y':'N'}
