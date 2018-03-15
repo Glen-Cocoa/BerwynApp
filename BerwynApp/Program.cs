@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,68 @@ namespace BerwynApp
                     Val2.Add(Val2Val);
                     Val3.Add(Val3Val);
                 }
+                //find the GUID of the row with the highest sum of V1&V2
+                int currentMax = 0;
+                string currentMaxID = "";
+
+
+                for(var i = 0; i < 10001; i++)
+                {
+                    string Val1Str = Val1[i].Replace("\"", "");
+                    string Val2Str = Val2[i].Replace("\"", "");
+                    int Val1Val = 0;
+                    int Val2Val = 0;
+                    Int32.TryParse(Val1Str, out Val1Val);
+                    Int32.TryParse(Val2Str, out Val2Val);
+
+                  
+                    if(Val1Val + Val2Val > currentMax)
+                    {
+                        currentMax = Val1Val + Val2Val;
+                        currentMaxID = GUID[i];
+                    }
+                   
+                }
+
+                //Find all duplicate GUID Values
+
+                List<string> duplicateGUIDVals = new List<string>();
+                var GUIDToBeChecked = "";
+
+                for(var j = 0; j<10001; j++)
+                {
+                    for (var k = 0; k < 10001; k++)
+                    {
+                        GUIDToBeChecked = GUID[j];
+                        if (GUIDToBeChecked == GUID[k])
+                        {
+                            duplicateGUIDVals.Add(GUIDToBeChecked);
+                        }
+                    }
+                }
+                //find average length of Val3
+                int lengthTally = 0;
+                
+                for(var k = 0; k < 10001; k++)
+                {
+                    string CurVal3 = Val3[k];
+                    int CurLen = CurVal3.Length;
+                    lengthTally += CurLen;
+                }
+
+                int avgLen = lengthTally / 10000;
+                string avgLenStr = avgLen.ToString();
+
+                //construct messy string to be output
+                string totalNumRecords = count.ToString();
+                string largestGUIDVal = currentMaxID;
+                string duplicateIDs = string.Join(Environment.NewLine, duplicateGUIDVals.ToArray());
+                string avgLenFinal = avgLenStr;
+
+                string answer = "Hello Steve! The total number of records in this .csv is {0}, The GUID of the largest sum of Val1 and Val2 is {1}, and the average length of Val3 is {2}";
+                var stringToLog = string.Format(answer, totalNumRecords, largestGUIDVal, avgLenFinal);
+
+                Console.WriteLine(stringToLog);
             }
         }
     }
