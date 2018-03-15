@@ -93,7 +93,7 @@ namespace BerwynApp
                 string avgLenStr = avgLen.ToString();
 
                 //construct messy string to be output
-                string totalNumRecords = count.ToString();
+                string totalNumRecords = (count-1).ToString();
                 string largestGUIDVal = currentMaxID;
                 string duplicateIDs = string.Join(Environment.NewLine, duplicateGUIDVals.ToArray());
                 string avgLenFinal = avgLenStr;
