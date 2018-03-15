@@ -13,14 +13,18 @@ namespace BerwynApp
         {
             using (var reader = new StreamReader(@"../../csv/test.csv"))
             {
-                List<string> listA = new List<string>();
+                List<string> GUID = new List<string>();
+                List<string> Val1 = new List<string>();
+                List<string> Val2 = new List<string>();
+                List<string> Val3 = new List<string>();
+                int count = 0;
 
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
-
-                    listA.Add(line);
-                    Console.Write(line);
+                    GUID.Add(line);
+                    count++;
+                    Console.WriteLine(count);
                 }
             }
         }
