@@ -66,16 +66,18 @@ namespace BerwynApp
                 List<string> duplicateGUIDVals = new List<string>();
                 var GUIDToBeChecked = "";
 
-                for(var j = 0; j<10001; j++)
+                for(var j = 1; j<10001; j++)
                 {
-                    for (var k = 0; k < 10001; k++)
+                    GUIDToBeChecked = GUID[j];
+
+                    for(var hello = 0; hello < 10001; hello++)
                     {
-                        GUIDToBeChecked = GUID[j];
-                        if (GUIDToBeChecked == GUID[k])
+                        if(GUIDToBeChecked == GUID[hello] && j != hello)
                         {
-                            duplicateGUIDVals.Add(GUIDToBeChecked);
+                            duplicateGUIDVals.Add(GUID[hello]);
                         }
                     }
+               
                 }
                 //find average length of Val3
                 int lengthTally = 0;
@@ -96,8 +98,8 @@ namespace BerwynApp
                 string duplicateIDs = string.Join(Environment.NewLine, duplicateGUIDVals.ToArray());
                 string avgLenFinal = avgLenStr;
 
-                string answer = "Hello Steve! The total number of records in this .csv is {0}, The GUID of the largest sum of Val1 and Val2 is {1}, and the average length of Val3 is {2}";
-                var stringToLog = string.Format(answer, totalNumRecords, largestGUIDVal, avgLenFinal);
+                string answer = "Hello Steve! The total number of records in this .csv is {0}, The GUID of the largest sum of Val1 and Val2 is {1}, and the average length of Val3 is {2}. The GUID of duplicate entries are {3}";
+                var stringToLog = string.Format(answer, totalNumRecords, largestGUIDVal, avgLenFinal, duplicateIDs);
 
                 Console.WriteLine(stringToLog);
             }
