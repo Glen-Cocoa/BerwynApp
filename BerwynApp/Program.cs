@@ -22,6 +22,9 @@ namespace BerwynApp
                 List<string> Val1 = new List<string>();
                 List<string> Val2 = new List<string>();
                 List<string> Val3 = new List<string>();
+                List<int> ValSumList = new List<int>();
+                List<string> duplicateGUIDVals = new List<string>();
+
 
                 //Loops through entire test.csv and assigns each value to its corresponding list
                 while (!reader.EndOfStream)
@@ -51,9 +54,11 @@ namespace BerwynApp
                     string Val2Str = Val2[i].Replace("\"", "");
                     int Val1Val = 0;
                     int Val2Val = 0;
+                    int together = 0;
                     Int32.TryParse(Val1Str, out Val1Val);
                     Int32.TryParse(Val2Str, out Val2Val);
-
+                    together = Val1Val + Val2Val;
+                    ValSumList.Add(together);
                   
                     if(Val1Val + Val2Val > currentMax)
                     {
@@ -65,7 +70,6 @@ namespace BerwynApp
 
                 //Find all duplicate GUID Values
 
-                List<string> duplicateGUIDVals = new List<string>();
                 var GUIDToBeChecked = "";
 
                 for(var j = 1; j<count; j++)
@@ -113,11 +117,16 @@ namespace BerwynApp
                 for (int z = 0; z < count; z++)
                 {
                     string line = "{0},{1},{2},{3}";
-                    string G2W = GUID[z].ToString();
-                    string V12W = Val1[z].ToString();
-                    string V22W = Val2[z].ToString();
-                    string V32W = Val3[z].ToString();
-                    string formattedLine = string.Format(line, G2W, V12W, V22W, V32W);
+                    //GUID
+                    string G2W = GUID[z];
+                    //Val1+Val2
+                    string ValSum = ValSumList[z].ToString();
+                    //IsDuplicateOrNot
+                    string isDuplicate = "N";
+                    //Val3GreaterLength
+                    string isGreaterThanAverage = "N";
+
+                    string formattedLine = string.Format(line, G2W, ValSum, isDuplicate, isGreaterThanAverage);
                     SW.WriteLine(formattedLine);
                 }
 
