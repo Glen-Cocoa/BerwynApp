@@ -38,12 +38,14 @@ namespace BerwynApp
                     Val2.Add(Val2Val);
                     Val3.Add(Val3Val);
                 }
+
+
                 //find the GUID of the row with the highest sum of V1&V2
                 int currentMax = 0;
                 string currentMaxID = "";
 
 
-                for(var i = 0; i < 10001; i++)
+                for(var i = 0; i < count; i++)
                 {
                     string Val1Str = Val1[i].Replace("\"", "");
                     string Val2Str = Val2[i].Replace("\"", "");
@@ -66,11 +68,11 @@ namespace BerwynApp
                 List<string> duplicateGUIDVals = new List<string>();
                 var GUIDToBeChecked = "";
 
-                for(var j = 1; j<10001; j++)
+                for(var j = 1; j<count; j++)
                 {
                     GUIDToBeChecked = GUID[j];
 
-                    for(var hello = 0; hello < 10001; hello++)
+                    for(var hello = 0; hello < count; hello++)
                     {
                         if(GUIDToBeChecked == GUID[hello] && j != hello)
                         {
@@ -79,17 +81,18 @@ namespace BerwynApp
                     }
                
                 }
+
                 //find average length of Val3
                 int lengthTally = 0;
                 
-                for(var k = 0; k < 10001; k++)
+                for(var k = 0; k < count; k++)
                 {
                     string CurVal3 = Val3[k];
                     int CurLen = CurVal3.Length;
                     lengthTally += CurLen;
                 }
 
-                int avgLen = lengthTally / 10000;
+                int avgLen = lengthTally / count;
                 string avgLenStr = avgLen.ToString();
 
                 //construct messy string to be output
@@ -102,7 +105,26 @@ namespace BerwynApp
                 var stringToLog = string.Format(answer, totalNumRecords, largestGUIDVal, avgLenFinal, duplicateIDs);
 
                 Console.WriteLine(stringToLog);
+
+                //Write to text file???
+
+                StreamWriter SW = new StreamWriter(@"output.csv");
+
+                for (int z = 0; z < count; z++)
+                {
+                    string line = "{0},{1},{2},{3}";
+                    string G2W = GUID[z].ToString();
+                    string V12W = Val1[z].ToString();
+                    string V22W = Val2[z].ToString();
+                    string V32W = Val3[z].ToString();
+                    string formattedLine = string.Format(line, G2W, V12W, V22W, V32W);
+                    SW.WriteLine(formattedLine);
+                }
+
+                SW.Close();
+
             }
+          
         }
     }
 }
