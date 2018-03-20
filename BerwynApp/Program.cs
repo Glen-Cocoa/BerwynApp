@@ -25,6 +25,7 @@ namespace BerwynApp
                 List<string> Val3 = new List<string>();
                 List<int> ValSumList = new List<int>();
                 List<string> duplicateGUIDVals = new List<string>();
+                Hashtable myTable = new Hashtable();
 
 
                 //Loops through entire test.csv and assigns each value to its corresponding list
@@ -42,7 +43,6 @@ namespace BerwynApp
                     Val2.Add(Val2Val);
                     Val3.Add(Val3Val);
                 }
-
 
                 //find the GUID of the row with the highest sum of V1&V2
                 int currentMax = 0;
@@ -70,7 +70,19 @@ namespace BerwynApp
                 }
 
                 //Find all duplicate GUID Values
-
+                for(var x = 0; x<count; x++)
+                {
+                    try
+                    {
+                        myTable.Add(GUID[x], count);
+                    }
+                    catch
+                    {
+                        duplicateGUIDVals.Add(GUID[x]);
+                        numberOfDuplicates++;
+                    }
+                }
+/*
                 var GUIDToBeChecked = "";
 
                 for(var j = 1; j<count; j++)
@@ -87,7 +99,7 @@ namespace BerwynApp
                     }
                
                 }
-
+*/
                 //find average length of Val3
                 int lengthTally = 0;
                 
