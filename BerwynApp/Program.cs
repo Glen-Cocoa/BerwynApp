@@ -16,6 +16,7 @@ namespace BerwynApp
             {
                 //count keeps track of current row and also total rows
                 int count = 0;
+                int numberOfDuplicates = 0;
 
                 //Lists to keep track of values after being parsed
                 List<string> GUID = new List<string>();
@@ -81,6 +82,7 @@ namespace BerwynApp
                         if(GUIDToBeChecked == GUID[hello] && j != hello)
                         {
                             duplicateGUIDVals.Add(GUID[hello]);
+                            numberOfDuplicates++;
                         }
                     }
                
@@ -123,8 +125,20 @@ namespace BerwynApp
                     string ValSum = ValSumList[z].ToString();
                     //IsDuplicateOrNot
                     string isDuplicate = "N";
+                    for(var y = 0; y < numberOfDuplicates; y++)
+                    {
+                        if(G2W == duplicateGUIDVals[y])
+                        {
+                            isDuplicate = "Y";
+                        }
+                    }
                     //Val3GreaterLength
                     string isGreaterThanAverage = "N";
+                    int Val3Length = Val3[z].Length;
+                    if (Val3Length > avgLen)
+                    {
+                        isGreaterThanAverage = "Y";
+                    }
 
                     string formattedLine = string.Format(line, G2W, ValSum, isDuplicate, isGreaterThanAverage);
                     SW.WriteLine(formattedLine);
