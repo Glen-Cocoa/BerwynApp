@@ -1,5 +1,5 @@
 Just run the program!
 
-Loops all contain the number of entries hard coded due to unfamiliarity with the language
-
-many fixes/corrections still to be made
+reads the source data from ./csv/test.csv 
+does calculations/parses the file and then writes a new csv containing information about the data in test.csv
+Implements a hash table to detect duplicates
